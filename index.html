@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="mn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Оношлогоо — Шинж тэмдгээс боломжит шалтгааныг тодорхойлно</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="hero glass">
+      <div class="logo">
+        <!-- Stethoscope SVG -->
+        <svg class="stetho" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M44 10c0 6-6 10-12 10s-12-4-12-10" stroke="var(--blue-600)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M20 20v8a12 12 0 0012 12h0" stroke="var(--blue-600)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M44 40v6a6 6 0 11-12 0v-6" stroke="var(--blue-600)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="46" cy="46" r="6" fill="rgba(49,105,247,0.08)" stroke="var(--blue-500)" stroke-width="2"/>
+        </svg>
+        <div>
+          <h1>Оношлогоо</h1>
+          <p class="subtitle">Шинж тэмдгээс боломжит шалтгааныг тодорхойлно</p>
+        </div>
+      </div>
+      <p class="lead">Тодорхой шинж тэмдгийг оруулж, `ШИНЖЛЭХ` товчоор үр дүнг аваарай.</p>
+    </header>
+
+    <section class="controls">
+      <form id="patient-form" class="glass form">
+        <div class="row">
+          <label class="field">
+            <span class="label">Нас</span>
+            <input type="number" id="age" min="0" max="120" placeholder="Жишээ: 34" />
+          </label>
+
+          <div class="field gender">
+            <span class="label">Хүйс</span>
+            <div class="gender-options">
+              <label><input type="radio" name="gender" value="male" checked> Эрэгтэй</label>
+              <label><input type="radio" name="gender" value="female"> Эмэгтэй</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="symptoms">
+          <label class="field">
+            <span class="label">Шинж тэмдэг сонгох</span>
+            <input type="search" id="symptom-search" placeholder="Шинж тэмдгээ бичиж хайна уу..." autocomplete="off" />
+          </label>
+
+          <div id="symptom-list" class="symptom-list" aria-live="polite"></div>
+
+          <div class="field duration">
+            <span class="label">Шинж тэмдэг үргэлжилж буй хугацаа</span>
+            <div class="duration-row">
+              <input type="number" id="duration-value" min="0" placeholder="Давтамж" />
+              <select id="duration-unit">
+                <option value="days">хоног</option>
+                <option value="weeks">давхар</option>
+                <option value="months">сар</option>
+              </select>
+            </div>
+          </div>
+
+          <label class="field">
+            <span class="label">Зовиурын тайлбар (тодруулж бичээрэй)</span>
+            <textarea id="nlp-input" rows="3" placeholder="Жишээ: Хөл давчдаж, ханиалгах, халуурахгүй" ></textarea>
+          </label>
+
+          <div class="analyze-wrap">
+            <button type="button" id="analyze-btn" class="analyze">ШИНЖЛЭХ</button>
+            <small class="hint">Локал шинжилгээний алгоритм — код render хийхэд шууд тохиромжтой.</small>
+          </div>
+
+          <div class="settings glass">
+            <label class="field">
+              <span class="label">Үр дүнгийн тоо</span>
+              <select id="result-count">
+                <option value="3">3</option>
+                <option value="5" selected>5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span class="label">Нөхцөл тодорхойлох хүч</span>
+              <input type="range" id="sensitivity" min="0.75" max="1.8" step="0.05" value="1" />
+            </label>
+          </div>
+        </div>
+      </form>
+
+      <aside class="warning glass">
+        <strong>Анхаар:</strong>
+        <p>Энэ нь эмнэлгийн онош биш. Бүх тооцоолол зөв гэдгийг баталдаггүй тул эмнэлгийн мэргэжилтэнтэй зөвлөнө үү.</p>
+      </aside>
+    </section>
+
+    <section class="results" id="results">
+      <h2>Үр дүн</h2>
+      <div id="results-list" class="results-list"></div>
+    </section>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Оношлогоо — Зөвлөгөө нь зөвхөн мэдээллийн зорилготой.</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
